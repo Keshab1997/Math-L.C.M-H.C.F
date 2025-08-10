@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>গণিত অধ্যায়: ল.সা.গু ও গ.সা.গু | Study With Keshab</title>
+    
+    <!-- প্রধান CSS ফাইল (আপনার সাইটের সাথে লিঙ্ক করুন) -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- আইকন ব্যবহারের জন্য Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- চার্ট ব্যবহারের জন্য Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    
+    <!-- পেজ লোডিং এর সময় হাইড করার জন্য স্টাইল -->
+    <style>
+      /* --- Auth Loading --- */
+      body.auth-loading { visibility: hidden; opacity: 0; }
+      
+      /* --- নতুন গণিত থিম --- */
+      body.theme-blue {
+          --theme-color-primary: #007bff;
+          --theme-color-secondary: #0056b3;
+          --theme-color-accent: #17a2b8;
+          --theme-color-background: #f4f7f9;
+          --card-bg-color: #ffffff;
+          --text-color: #333;
+          --header-bg: linear-gradient(135deg, #007bff, #0056b3);
+      }
+      .dark-mode.theme-blue {
+          --theme-color-primary: #4dabf7;
+          --theme-color-secondary: #1971c2;
+          --theme-color-accent: #3bc9db;
+          --theme-color-background: #1a1a2e;
+          --card-bg-color: #16213e;
+          --text-color: #e0e0e0;
+          --header-bg: linear-gradient(135deg, #16213e, #0f3460);
+      }
+
+      /* --- ফর্মুলা কার্ডের জন্য বিশেষ স্টাইল --- */
+      .formula-card ul {
+          list-style-type: none;
+          padding-left: 0;
+      }
+      .formula-card > ul > li {
+          background-color: var(--theme-color-background);
+          margin-bottom: 15px;
+          padding: 15px;
+          border-radius: 8px;
+          border-left: 4px solid var(--theme-color-primary);
+      }
+      .formula-card h4 {
+          color: var(--theme-color-secondary);
+          margin-top: 0;
+          font-size: 1.2rem;
+      }
+      .formula-card code {
+          background: rgba(0, 123, 255, 0.1);
+          color: #0056b3;
+          padding: 3px 6px;
+          border-radius: 4px;
+          font-family: 'Courier New', Courier, monospace;
+          font-weight: bold;
+      }
+      .dark-mode .formula-card code {
+          background: rgba(77, 171, 247, 0.2);
+          color: #a5d8ff;
+      }
+      
+      /* কার্ডের আইকন এর জন্য স্টাইল */
+      .card-icon {
+          color: var(--theme-color-accent);
+          margin-right: 10px;
+      }
+
+    </style>
+</head>
+<body class="day-mode homepage theme-blue auth-loading">
+
+    <!-- Preloader -->
+    <div id="preloader"><div class="loader"></div></div>
+
+    <header class="main-header">
+        <img src="images/logo.jpg" alt="লোগো" class="profile-pic">
+        <div class="header-text">
+            <h1>গণিত অধ্যায়: ল.সা.গু ও গ.সা.গু</h1>
+            <p>প্রতিটি ধারণা পরিষ্কার করুন, ধাপে ধাপে</p>
+        </div>
+        <button id="dark-mode-toggle" class="dark-mode-button" title="দিন/রাত মোড পরিবর্তন করুন">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+    </header>
+    
+    <div class="search-container">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="search-bar" placeholder="সূত্র বা কোনো বিষয় খুঁজুন...">
+    </div>
+
+    <nav class="nav-grid">
+        <a href="https://keshab1997.github.io/Study-With-Keshab/" class="nav-button color-home"><i class="fa-solid fa-house"></i><span>হোম</span></a>
+        <a href="#dashboard" class="nav-button color-dashboard"><i class="fa-solid fa-chart-line"></i><span>ড্যাশবোর্ড</span></a>
+        <a href="#theory-concepts" class="nav-button color-notes"><i class="fa-solid fa-book"></i><span>থিওরি ও ধারণা</span></a>
+        <a href="#formulas-methods" class="nav-button color-formulas"><i class="fa-solid fa-calculator"></i><span>সূত্রাবলী</span></a>
+        <a href="#practice-quiz" class="nav-button color-quiz"><i class="fa-solid fa-pen-to-square"></i><span>অনুশীলনী</span></a>
+        <a href="#leaderboard" class="nav-button color-leaderboard"><i class="fa-solid fa-trophy"></i><span>লিডারবোর্ড</span></a>
+    </nav>
+
+    <main>
+        <!-- === এই অধ্যায়ের নাম JS এর জন্য নির্দিষ্ট করা হয়েছে === -->
+        <script>
+            const CURRENT_CHAPTER_NAME = "Math লসাগু ও গসাগু";
+        </script>
+        
+        <!-- ইউজার প্রোফাইল কার্ড -->
+        <section class="card" id="user-profile-card">
+            <div class="profile-header">
+                <img id="user-profile-pic" src="images/default-avatar.png" alt="Profile Picture" class="profile-pic-large">
+                <div class="profile-info">
+                    <h2 id="user-display-name">লোড হচ্ছে...</h2>
+                    <p id="user-email">লোড হচ্ছে...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ড্যাশবোর্ড সেকশন -->
+        <section class="card" id="dashboard">
+             <h2><i class="fa-solid fa-chart-pie card-icon"></i>আমার পারফরম্যান্স</h2>
+             <div class="dashboard-grid">
+                <div class="dashboard-item"><h3>অধ্যায়ের অগ্রগতি (কুইজ)</h3><div class="progress-bar-container"><div class="progress-bar" id="chapter-progress-bar" style="width: 0%;"></div></div><p id="chapter-progress-text">0% সম্পন্ন</p></div>
+                <div class="dashboard-item"><h3>সঠিক বনাম ভুল উত্তর</h3><canvas id="quiz-pie-chart"></canvas></div>
+                <div class="dashboard-item"><h3>দৈনিক চ্যালেঞ্জ</h3><div id="daily-challenge" class="challenge-box"><p id="challenge-text">আজকের চ্যালেঞ্জ লোড হচ্ছে...</p></div></div>
+                <div class="dashboard-item"><h3>আমার অ্যাচিভমেন্টস</h3><div class="achievements-container" id="achievements-container"></div></div>
+             </div>
+        </section>
+
+        <!-- থিওরি ও মৌলিক ধারণা সেকশন -->
+        <section class="card" id="theory-concepts">
+            <h2><i class="fa-solid fa-book card-icon"></i>থিওরি ও মৌলিক ধারণা</h2>
+            <p>অধ্যায়টি ভালোভাবে বুঝতে প্রতিটি ক্লাস নোট পড়ুন। এখানে ল.সা.গু ও গ.সা.গু এর মৌলিক ধারণাগুলো আলোচনা করা হয়েছে।</p>
+            <div class="notes-grid-container">
+                <a href="class/class1.html" class="note-card"><i class="fa-solid fa-file-alt"></i><span>ধারণা ও পদ্ধতি</span></a>
+                <a href="class/class2.html" class="note-card"><i class="fa-solid fa-file-alt"></i><span>ভগ্নাংশের নিয়ম</span></a>
+                <a href="class/class3.html" class="note-card"><i class="fa-solid fa-file-alt"></i><span>ভাগশেষের সমস্যা</span></a>
+                <a href="class/class4.html" class="note-card"><i class="fa-solid fa-file-alt"></i><span>বিশেষ সমস্যা</span></a>
+            </div>
+        </section>
+
+        <!-- গুরুত্বপূর্ণ সূত্রাবলী ও পদ্ধতি সেকশন -->
+        <section class="card formula-card" id="formulas-methods">
+            <h2><i class="fa-solid fa-calculator card-icon"></i>গুরুত্বপূর্ণ সূত্রাবলী ও পদ্ধতি</h2>
+            <p>এই সূত্রগুলো মনে রাখলে যেকোনো সমস্যার সমাধান দ্রুত করতে পারবেন।</p>
+            <ul>
+                <li>
+                    <h4>গ.সা.গু (HCF) ও ল.সা.গু (LCM)</h4>
+                    <p><b>HCF:</b> সাধারণ মৌলিক উৎপাদকগুলির <b>সর্বনিম্ন ঘাত</b>-এর গুণফল।</p>
+                    <p><b>LCM:</b> সমস্ত মৌলিক উৎপাদকের <b>সর্বোচ্চ ঘাত</b>-এর গুণফল।</p>
+                </li>
+                <li>
+                    <h4>দুটি সংখ্যার সম্পর্ক</h4>
+                    <p><code>সংখ্যা দুটির গুণফল = গ.সা.গু × ল.সা.গু</code></p>
+                </li>
+                 <li>
+                    <h4>ভগ্নাংশের সূত্র</h4>
+                    <p>ভগ্নাংশের লসাগু = <code>(লবগুলির লসাগু) / (হরগুলির গসাগু)</code></p>
+                    <p>ভগ্নাংশের গসাগু = <code>(লবগুলির গসাগু) / (হরগুলির লসাগু)</code></p>
+                </li>
+                 <li>
+                    <h4>ভাগশেষ সংক্রান্ত সূত্র</h4>
+                    <p><b>একই ভাগশেষ (R) থাকলে ক্ষুদ্রতম সংখ্যা:</b> <code>(সংখ্যাগুলির ল.সা.গু) + R</code></p>
+                    <p><b>ভিন্ন ভাগশেষ কিন্তু পার্থক্য (K) এক হলে:</b> <code>(সংখ্যাগুলির ল.সা.গু) - K</code></p>
+                </li>
+            </ul>
+        </section>
+
+        <!-- ধাপে ধাপে সমাধান সেকশন -->
+        <section class="card" id="solved-examples">
+            <h2><i class="fa-solid fa-lightbulb card-icon"></i>ধাপে ধাপে সমাধান (Solved Examples)</h2>
+            <p>কঠিন সমস্যাগুলোর সমাধান কীভাবে করতে হয়, তা এখান থেকে দেখে নিন।</p>
+            <div class="link-container">
+                <a href="solved/example1.html">💡 অনুপাত সংক্রান্ত সমস্যা</a>
+                <a href="solved/example2.html">💡 শর্তযুক্ত সংখ্যার সমস্যা</a>
+            </div>
+        </section>
+        
+        <!-- অনুশীলনী ও কুইজ সেট সেকশন -->
+        <section class="card" id="practice-quiz">
+             <h2><i class="fa-solid fa-pen-to-square card-icon"></i>অনুশীলনী ও কুইজ সেট</h2>
+             <p>নিজের প্রস্তুতি যাচাই করার জন্য ইন্টারেক্টিভ কুইজগুলোতে অংশ নিন এবং অনুশীলনী সমাধান করুন।</p>
+             <div class="link-container">
+                 <a href="quiz/Qset1.html">📝 Quiz Set 1 (মৌলিক)</a>
+                 <a href="quiz/Qset2.html">📝 Quiz Set 2 (মধ্যম)</a>
+                 <a href="quiz/Qset3.html">📝 Quiz Set 3 (উন্নত)</a>
+                 <a href="practice/PracticeSet1.html">✍️ অনুশীলনী সেট (MCQ)</a>
+             </div>
+        </section>
+
+        <!-- লিডারবোর্ড সেকশন -->
+        <section class="card" id="leaderboard">
+            <h2><i class="fa-solid fa-trophy card-icon"></i>অধ্যায়ের লিডারবোর্ড</h2>
+            <p>এই অধ্যায়ের কুইজে সর্বোচ্চ স্কোরারদের তালিকা।</p>
+            <div class="leaderboard-container">
+                <table>
+                    <thead><tr><th>#</th><th>নাম</th><th>মোট স্কোর</th><th>বিস্তারিত</th></tr></thead>
+                    <tbody id="leaderboard-body"></tbody>
+                </table>
+            </div>
+        </section>
+        
+    </main>
+    
+    <a id="back-to-top" href="#"><i class="fas fa-arrow-up"></i></a>
+    
+    <footer>
+        <p>&copy; 2025 কেশব সরকার। সর্বস্বত্ব সংরক্ষিত।</p>
+        <div class="social-links">
+            <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+        </div>
+    </footer>
+
+    <!-- Firebase এবং পেজ প্রটেকশন স্ক্রিপ্ট -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script>
+        (function() {
+            firebase.auth().onAuthStateChanged(user => {
+                if (!user) {
+                    window.location.href = 'https://keshab1997.github.io/Study-With-Keshab/login.html'; 
+                } else {
+                    document.body.classList.remove('auth-loading');
+                }
+            });
+        })();
+    </script>
+    
+    <!-- প্রধান জাভাস্ক্রিপ্ট ফাইল -->
+    <script src="js/script.js"></script>
+    
+</body>
+</html>
