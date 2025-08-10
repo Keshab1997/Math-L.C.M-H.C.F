@@ -39,7 +39,50 @@
           --header-bg: linear-gradient(135deg, #16213e, #0f3460);
       }
 
-      /* --- ফর্মুলা কার্ডের জন্য বিশেষ স্টাইল --- */
+      /* কার্ডের আইকন এর জন্য স্টাইল */
+      .card-icon {
+          color: var(--theme-color-accent);
+          margin-right: 10px;
+      }
+      
+      /* --- নতুন যোগ করা স্টাইল --- */
+      
+      /* ইন্টারেক্টিভ ক্যালকুলেটর */
+      .calculator-form {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          align-items: center;
+          margin-bottom: 15px;
+      }
+      .calculator-form input {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          flex-grow: 1;
+      }
+      .calculator-form button {
+          padding: 10px 15px;
+          background-color: var(--theme-color-primary);
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s;
+      }
+      .calculator-form button:hover {
+          background-color: var(--theme-color-secondary);
+      }
+      #calculator-result p {
+          margin: 5px 0;
+          font-size: 1.1rem;
+          color: var(--theme-color-secondary);
+      }
+      .dark-mode #calculator-result p {
+          color: var(--theme-color-primary);
+      }
+
+      /* ফর্মুলা কার্ডের জন্য বিশেষ স্টাইল */
       .formula-card ul {
           list-style-type: none;
           padding-left: 0;
@@ -63,16 +106,75 @@
           border-radius: 4px;
           font-family: 'Courier New', Courier, monospace;
           font-weight: bold;
+          display: block;
+          margin-top: 5px;
       }
       .dark-mode .formula-card code {
           background: rgba(77, 171, 247, 0.2);
           color: #a5d8ff;
       }
-      
-      /* কার্ডের আইকন এর জন্য স্টাইল */
-      .card-icon {
-          color: var(--theme-color-accent);
-          margin-right: 10px;
+
+      /* সমাধানসহ উদাহরণের জন্য Accordion স্টাইল */
+      .accordion-header {
+          background-color: var(--theme-color-background);
+          color: var(--text-color);
+          cursor: pointer;
+          padding: 18px;
+          width: 100%;
+          border: none;
+          text-align: left;
+          outline: none;
+          font-size: 1.1rem;
+          transition: background-color 0.3s ease;
+          border-bottom: 1px solid #ddd;
+          position: relative;
+      }
+      .dark-mode .accordion-header {
+        border-bottom: 1px solid #333;
+      }
+      .accordion-header:hover, .accordion-header.active {
+          background-color: rgba(0, 123, 255, 0.1);
+      }
+      .accordion-header::after {
+          content: '\f067'; /* Font Awesome plus icon */
+          font-family: 'Font Awesome 6 Free';
+          font-weight: 900;
+          color: var(--theme-color-primary);
+          position: absolute;
+          right: 18px;
+          transition: transform 0.3s ease;
+      }
+      .accordion-header.active::after {
+          transform: rotate(45deg);
+      }
+      .accordion-content {
+          padding: 0 18px;
+          background-color: var(--card-bg-color);
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease-out;
+      }
+      .accordion-content div {
+          padding: 15px 0;
+      }
+
+      /* ভিডিও টিউটোরিয়াল সেকশন */
+      .video-container {
+          position: relative;
+          padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+          height: 0;
+          overflow: hidden;
+          border-radius: 8px;
+      }
+      .video-container iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+      }
+      .fa-youtube {
+          color: #FF0000;
       }
 
     </style>
@@ -135,75 +237,119 @@
              </div>
         </section>
 
+        <!-- ইন্টারেক্টিভ ক্যালকুলেটর (নতুন) -->
+        <section class="card" id="interactive-calculator">
+            <h2><i class="fa-solid fa-calculator card-icon"></i>ল.সা.গু/গ.সা.গু ক্যালকুলেটর</h2>
+            <p>দুটি সংখ্যা ইনপুট দিয়ে তাদের ল.সা.গু ও গ.সা.গু সাথে সাথে দেখুন।</p>
+            <div class="calculator-form">
+                <input type="number" id="num1" placeholder="প্রথম সংখ্যা">
+                <input type="number" id="num2" placeholder="দ্বিতীয় সংখ্যা">
+                <button id="calculate-btn">হিসাব করুন</button>
+            </div>
+            <div id="calculator-result"></div>
+        </section>
+
         <!-- থিওরি ও মৌলিক ধারণা সেকশন -->
-<section class="card" id="theory-concepts">
-    <h2><i class="fa-solid fa-book card-icon"></i>থিওরি ও মৌলিক ধারণা</h2>
-    <p>অধ্যায়টি ভালোভাবে বুঝতে প্রতিটি ক্লাস নোট পড়ুন। এখানে ল.সা.গু ও গ.সা.গু এর মৌলিক ধারণাগুলো আলোচনা করা হয়েছে।</p>
-    <div class="notes-grid-container">
-        
-        <a href="https://drive.google.com/file/d/1Ko89FxBy6Hgu4gUtPnHKjMUJsw_FiNrr/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-file-alt"></i>
-            <span>Class Note 1</span>
-        </a>
-        
-        <a href="https://drive.google.com/file/d/1LKonvlAzSXM1P_eeIC_Zj_2Kg5n7r2o2/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-file-alt"></i>
-            <span>Class Note 2</span>
-        </a>
-        
-        <a href="https://drive.google.com/file/d/1LGbrygde873DQ1KbJlIt1EQGyDVpkoss/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-file-alt"></i>
-            <span>Class Note 3</span>
-        </a>
-        
-        <a href="https://drive.google.com/file/d/1L9LxUxV7RRo_-b3awuYYjrVPeY70vLDg/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-file-alt"></i>
-            <span>Class Note 4</span>
-        </a>
-        
-        <a href="https://drive.google.com/file/d/1L4mqXr85T0rrnsbVvoXqezOzc7klEOTa/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-file-alt"></i>
-            <span>Class Note 5</span>
-        </a>
-        
-        <a href="https://drive.google.com/file/d/1L-OW7B0EjUukqABhllrEXCpoHedHTDG_/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-file-alt"></i>
-            <span>Class Note 6</span>
-        </a>
-        
-        <a href="https://drive.google.com/file/d/1KzuzUrCGA_d-EeTq5ZEiv5RUVi2jfEF6/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-file-alt"></i>
-            <span>Class Note 7</span>
-        </a>
-        
-        <a href="https://drive.google.com/file/d/1KxaVpPOVbA7J8iXmTjnFlcx7Noojfydx/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-file-alt"></i>
-            <span>Class Note 8</span>
-        </a>
-        
-        <a href="https://drive.google.com/file/d/1Ktp0vXFdbYkDHXSNIDzTcZ_VgBrbz-Sp/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-file-alt"></i>
-            <span>Class Note 9</span>
-        </a>
-        
-        <a href="https://drive.google.com/file/d/1LNfRSQ4bAmkCn3dSGVLJzoLBP1BMh9XN/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-file-alt"></i>
-            <span>Class Note 10</span>
-        </a>
-        
-        <a href="https://docs.google.com/document/d/1GKIH9K2-kU-oWKaIBcJFQ93ui9RUIUPqnJ_U7U0A6is/edit?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-file-alt"></i>
-            <span>Class Note 11</span>
-        </a>
-        
-        <a href="https://drive.google.com/file/d/1Ks0WFJB8KVnZHhK9cWk_2ST_RRjea_Ag/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-file-alt"></i>
-            <span>Class Note 12</span>
-        </a>
-        
-    </div>
-</section>
-        
+        <section class="card" id="theory-concepts">
+            <h2><i class="fa-solid fa-book card-icon"></i>থিওরি ও মৌলিক ধারণা</h2>
+            <p>অধ্যায়টি ভালোভাবে বুঝতে প্রতিটি ক্লাস নোট পড়ুন। এখানে ল.সা.গু ও গ.সা.গু এর মৌলিক ধারণাগুলো আলোচনা করা হয়েছে।</p>
+            <div class="notes-grid-container">
+                <a href="https://drive.google.com/file/d/1Ko89FxBy6Hgu4gUtPnHKjMUJsw_FiNrr/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-alt"></i><span>Class Note 1</span></a>
+                <a href="https://drive.google.com/file/d/1LKonvlAzSXM1P_eeIC_Zj_2Kg5n7r2o2/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-alt"></i><span>Class Note 2</span></a>
+                <a href="https://drive.google.com/file/d/1LGbrygde873DQ1KbJlIt1EQGyDVpkoss/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-alt"></i><span>Class Note 3</span></a>
+                <a href="https://drive.google.com/file/d/1L9LxUxV7RRo_-b3awuYYjrVPeY70vLDg/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-alt"></i><span>Class Note 4</span></a>
+                <a href="https://drive.google.com/file/d/1L4mqXr85T0rrnsbVvoXqezOzc7klEOTa/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-alt"></i><span>Class Note 5</span></a>
+                <a href="https://drive.google.com/file/d/1L-OW7B0EjUukqABhllrEXCpoHedHTDG_/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-alt"></i><span>Class Note 6</span></a>
+                <a href="https://drive.google.com/file/d/1KzuzUrCGA_d-EeTq5ZEiv5RUVi2jfEF6/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-alt"></i><span>Class Note 7</span></a>
+                <a href="https://drive.google.com/file/d/1KxaVpPOVbA7J8iXmTjnFlcx7Noojfydx/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-alt"></i><span>Class Note 8</span></a>
+                <a href="https://drive.google.com/file/d/1Ktp0vXFdbYkDHXSNIDzTcZ_VgBrbz-Sp/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-alt"></i><span>Class Note 9</span></a>
+                <a href="https://drive.google.com/file/d/1LNfRSQ4bAmkCn3dSGVLJzoLBP1BMh9XN/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-alt"></i><span>Class Note 10</span></a>
+                <a href="https://docs.google.com/document/d/1GKIH9K2-kU-oWKaIBcJFQ93ui9RUIUPqnJ_U7U0A6is/edit?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-alt"></i><span>Class Note 11</span></a>
+                <a href="https://drive.google.com/file/d/1Ks0WFJB8KVnZHhK9cWk_2ST_RRjea_Ag/view?usp=drive_link" class="note-card" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-alt"></i><span>Class Note 12</span></a>
+            </div>
+        </section>
+
+        <!-- এক নজরে সূত্রাবলী (নতুন) -->
+        <section class="card formula-card" id="quick-formulas">
+            <h2><i class="fa-solid fa-star card-icon"></i>এক নজরে সূত্রাবলী</h2>
+            <ul>
+                <li>
+                    <h4>দুটি সংখ্যার সম্পর্ক</h4>
+                    <p>দুটি সংখ্যার গুণফল তাদের ল.সা.গু ও গ.সা.গু-এর গুণফলের সমান।</p>
+                    <code>সংখ্যা ১ × সংখ্যা ২ = ল.সা.গু × গ.সা.গু</code>
+                </li>
+                <li>
+                    <h4>ভগ্নাংশের ল.সা.গু</h4>
+                    <p>ভগ্নাংশের ল.সা.গু নির্ণয়ের জন্য লবগুলোর ল.সা.গু-কে হরগুলোর গ.সা.গু দিয়ে ভাগ করতে হয়।</p>
+                    <code>ল.সা.গু (a/b, c/d) = ল.সা.গু(a, c) / গ.সা.গু(b, d)</code>
+                </li>
+                <li>
+                    <h4>ভগ্নাংশের গ.সা.গু</h4>
+                    <p>ভগ্নাংশের গ.সা.গু নির্ণয়ের জন্য লবগুলোর গ.সা.গু-কে হরগুলোর ল.সা.গু দিয়ে ভাগ করতে হয়।</p>
+                    <code>গ.সা.গু (a/b, c/d) = গ.সা.গু(a, c) / ল.সা.গু(b, d)</code>
+                </li>
+            </ul>
+        </section>
+
+        <!-- সমাধানসহ উদাহরণ (নতুন) -->
+        <section class="card" id="solved-examples">
+            <h2><i class="fa-solid fa-lightbulb card-icon"></i>সমাধানসহ উদাহরণ</h2>
+            <p>সাধারণ সমস্যাগুলো কীভাবে সমাধান করবেন তা ধাপে ধাপে দেখুন।</p>
+            <div class="accordion">
+                <button class="accordion-header">উদাহরণ ১: ১২ ও ১৮ এর ল.সা.গু ও গ.সা.গু নির্ণয়</button>
+                <div class="accordion-content">
+                    <div>
+                        <p><strong>গ.সা.গু (HCF) নির্ণয়:</strong><br>
+                        প্রথমে সংখ্যাগুলোর মৌলিক উৎপাদক বের করি।<br>
+                        ১২ = ২ × ২ × ৩<br>
+                        ১৮ = ২ × ৩ × ৩<br>
+                        এখানে সাধারণ উৎপাদকগুলো হলো ২ এবং ৩।<br>
+                        ∴ নির্ণেয় গ.সা.গু = ২ × ৩ = <strong>৬</strong>।</p>
+                        <hr>
+                        <p><strong>ল.সা.গু (LCM) নির্ণয়:</strong><br>
+                        সাধারণ এবং বাকি সকল উৎপাদকগুলোর গুণফলই হলো ল.সা.গু।<br>
+                        ল.সা.গু = ২ × ২ × ৩ × ৩ = <strong>৩৬</strong>।<br>
+                        <strong>বিকল্প পদ্ধতি:</strong> ল.সা.গু = (সংখ্যা দুটির গুণফল) / গ.সা.গু = (১২ × ১৮) / ৬ = ২১৬ / ৬ = <strong>৩৬</strong>।</p>
+                    </div>
+                </div>
+
+                <button class="accordion-header">উদাহরণ ২: ২/৩ এবং ৪/৯ ভগ্নাংশ দুটির গ.সা.গু কত?</button>
+                <div class="accordion-content">
+                    <div>
+                        <p>আমরা জানি, ভগ্নাংশের গ.সা.গু = (লবগুলোর গ.সা.গু) / (হরগুলোর ল.সা.গু)।</p>
+                        <p>এখানে লব হলো ২ এবং ৪।<br>
+                        ২ ও ৪ এর গ.সা.গু = <strong>২</strong>।</p>
+                        <p>হর হলো ৩ এবং ৯।<br>
+                        ৩ ও ৯ এর ল.সা.গু = <strong>৯</strong>।</p>
+                        <p>∴ নির্ণেয় গ.সা.গু = <strong>২/৯</strong>।</p>
+                    </div>
+                </div>
+                 <button class="accordion-header">উদাহরণ ৩: কোন ক্ষুদ্রতম সংখ্যাকে ১২, ১৫, ২০ ও ২৫ দিয়ে ভাগ করলে প্রতিক্ষেত্রে ১১ অবশিষ্ট থাকে?</button>
+                <div class="accordion-content">
+                    <div>
+                        <p>যে ক্ষুদ্রতম সংখ্যাকে প্রদত্ত সংখ্যাগুলো দিয়ে ভাগ করলে কোনো অবশিষ্ট থাকে না, সেটি হলো তাদের ল.সা.গু।</p>
+                        <p>প্রথমে ১২, ১৫, ২০, ২৫ এর ল.সা.গু বের করি।<br>
+                         ১২ = ২ × ২ × ৩<br>
+                         ১৫ = ৩ × ৫<br>
+                         ২০ = ২ × ২ × ৫<br>
+                         ২৫ = ৫ × ৫<br>
+                        ∴ ল.সা.গু = ২ × ২ × ৩ × ৫ × ৫ = <strong>৩০০</strong>।</p>
+                        <p>যেহেতু প্রতিক্ষেত্রে ১১ অবশিষ্ট থাকতে হবে, তাই নির্ণেয় সংখ্যাটি হবে ল.সা.গু থেকে ১১ বেশি।</p>
+                        <p>∴ নির্ণেয় সংখ্যা = ৩০০ + ১১ = <strong>৩১১</strong>।</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ভিডিও টিউটোরিয়াল (নতুন) -->
+        <section class="card" id="video-tutorials">
+            <h2><i class="fa-brands fa-youtube card-icon"></i>ভিডিও লেকচার</h2>
+            <p>এই অধ্যায়ের গুরুত্বপূর্ণ ধারণাগুলো ভিডিওর মাধ্যমে সহজে বুঝে নিন।</p>
+            <div class="video-container">
+                <!-- নিচের src লিঙ্কে YOUR_VIDEO_ID এর জায়গায় আপনার ইউটিউব ভিডিওর আইডি দিন -->
+                <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
         
         <!-- অনুশীলনী ও কুইজ সেট সেকশন -->
         <section class="card" id="practice-quiz">
@@ -260,6 +406,60 @@
     
     <!-- প্রধান জাভাস্ক্রিপ্ট ফাইল -->
     <script src="js/script.js"></script>
+
+    <!-- নতুন সেকশনের জন্য জাভাস্ক্রিপ্ট -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            // --- Accordion Logic ---
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const content = this.nextElementSibling;
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                    }
+                });
+            });
+
+            // --- Interactive Calculator Logic ---
+            // Helper function to find GCD (গ.সা.গু)
+            function gcd(a, b) {
+                if (b === 0) return a;
+                return gcd(b, a % b);
+            }
+
+            // Helper function to find LCM (ল.সা.গু)
+            function lcm(a, b) {
+                return (a * b) / gcd(a, b);
+            }
+            
+            const calculateBtn = document.getElementById('calculate-btn');
+            if (calculateBtn) {
+                 calculateBtn.addEventListener('click', function() {
+                    const num1 = parseInt(document.getElementById('num1').value);
+                    const num2 = parseInt(document.getElementById('num2').value);
+                    const resultDiv = document.getElementById('calculator-result');
+
+                    if (isNaN(num1) || isNaN(num2) || num1 <= 0 || num2 <= 0) {
+                        resultDiv.innerHTML = `<p style="color: red;">অনুগ্রহ করে দুটি ধনাত্মক পূর্ণসংখ্যা দিন।</p>`;
+                        return;
+                    }
+
+                    const calculatedGcd = gcd(num1, num2);
+                    const calculatedLcm = lcm(num1, num2);
+
+                    resultDiv.innerHTML = `
+                        <p>গ.সা.গু (HCF): ${calculatedGcd}</p>
+                        <p>ল.সা.গু (LCM): ${calculatedLcm}</p>
+                    `;
+                });
+            }
+        });
+    </script>
     
 </body>
 </html>
