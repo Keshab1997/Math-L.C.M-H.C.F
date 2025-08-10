@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>লসাগু ও গসাগু ক্যালকুলেটর</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2980b9;
+            --secondary-color: #27ae60;
+            --bg-color: #f4f7f9;
+            --card-bg: #ffffff;
+            --text-color: #34495e;
+            --border-color: #e1e8ed;
+            --error-color: #e74c3c;
+            --success-color: #2ecc71;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .calculator-container {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 550px;
+            overflow: hidden;
+            border-top: 5px solid var(--primary-color);
+        }
+
+        header h2 {
+            margin: 0;
+            padding: 20px 25px;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        
+        .tabs {
+            display: flex;
+            background-color: #ecf0f1;
+        }
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        .tab-button.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .tab-content {
+            padding: 25px;
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .input-group input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .fraction-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .fraction-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .fraction-input-group input {
+            width: 100px;
+            text-align: center;
+        }
+        .fraction-input-group .separator {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        #add-fraction {
+            margin-top: 15px;
+            background-color: var(--secondary-color);
+            color: white;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .button-group button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .calc-button {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .calc-button:hover {
+            background-color: #3498db;
+        }
+        .reset-button {
+            background-color: #bdc3c7;
+            color: #2c3e50;
+        }
+        .reset-button:hover {
+            background-color: #95a5a6;
+        }
+
+        .result-area {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #eaf2f8;
+            border-left: 5px solid var(--secondary-color);
+            border-radius: 0 8px 8px 0;
+            display: none;
+        }
+        .result-area h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        .result-area p {
+            margin: 8px 0;
+            font-size: 1.1rem;
+        }
+        .result-area .value {
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+        .error-message {
+            color: var(--error-color);
+            margin-top: 10px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator-container">
+        <header>
+            <h2>ল.সা.গু ও গ.সা.গু ক্যালকুলেটর</h2>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-button active" data-tab="integer-calculator">পূর্ণসংখ্যার জন্য</button>
+            <button class="tab-button" data-tab="fraction-calculator">ভগ্নাংশের জন্য</button>
+        </div>
+
+        <div id="integer-calculator" class="tab-content active">
+            <div class="input-group">
+                <label for="integer-input">সংখ্যাগুলো লিখুন (কমা দিয়ে আলাদা করুন)</label>
+                <input type="text" id="integer-input" placeholder="যেমন: 12, 18, 30">
+            </div>
+            <div class="button-group">
+                <button id="calc-integers" class="calc-button">হিসাব করুন</button>
+                <button id="reset-integers" class="reset-button">রিসেট</button>
+            </div>
+        </div>
+
+        <div id="fraction-calculator" class="tab-content">
+            <div class="input-group">
+                <label>ভগ্নাংশগুলো লিখুন</label>
+                <div class="fraction-inputs" id="fraction-inputs">
+                    <div class="fraction-input-group">
+                        <input type="text" class="numerator" placeholder="লব">
+                        <span class="separator">/</span>
+                        <input type="text" class="denominator" placeholder="হর">
+                    </div>
+                    <div class="fraction-input-group">
+                        <input type="text" class="numerator" placeholder="লব">
+                        <span class="separator">/</span>
+                        <input type="text" class="denominator" placeholder="হর">
+                    </div>
+                </div>
+                <button id="add-fraction" class="reset-button">আরও একটি ভগ্নাংশ যোগ করুন</button>
+            </div>
+            <div class="button-group">
+                <button id="calc-fractions" class="calc-button">হিসাব করুন</button>
+                <button id="reset-fractions" class="reset-button">রিসেট</button>
+            </div>
+        </div>
+        
+        <div class="result-area" id="result-area">
+            <h3>ফলাফল</h3>
+            <p>নির্ণীত ল.সা.গু (LCM): <span id="lcm-result" class="value"></span></p>
+            <p>নির্ণীত গ.সা.গু (HCF): <span id="hcf-result" class="value"></span></p>
+            <p class="error-message" id="error-message"></p>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Helper functions for GCD (HCF) and LCM
+    const gcd = (a, b) => {
+        while (b) {
+            [a, b] = [b, a % b];
+        }
+        return a;
+    };
+
+    const lcm = (a, b) => (a * b) / gcd(a, b);
+
+    const hcfOfArray = (arr) => arr.reduce((acc, val) => gcd(acc, val));
+    const lcmOfArray = (arr) => arr.reduce((acc, val) => lcm(acc, val));
+    
+    // Tab switching logic
+    const tabs = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+    const resultArea = document.getElementById('result-area');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            
+            tabContents.forEach(content => content.classList.remove('active'));
+            document.getElementById(tab.dataset.tab).classList.add('active');
+            resultArea.style.display = 'none'; // Hide result on tab switch
+        });
+    });
+
+    // Integer Calculator Logic
+    const calcIntegersBtn = document.getElementById('calc-integers');
+    const resetIntegersBtn = document.getElementById('reset-integers');
+    const integerInput = document.getElementById('integer-input');
+
+    calcIntegersBtn.addEventListener('click', () => {
+        const inputStr = integerInput.value;
+        if (!inputStr) {
+            showError("দয়া করে সংখ্যা লিখুন।");
+            return;
+        }
+
+        const numbers = inputStr.split(',')
+                                .map(item => parseInt(item.trim()))
+                                .filter(num => !isNaN(num));
+
+        if (numbers.length < 2) {
+            showError("কমপক্ষে দুটি বৈধ সংখ্যা প্রয়োজন।");
+            return;
+        }
+
+        const hcf = hcfOfArray(numbers);
+        const lcms = lcmOfArray(numbers);
+        
+        showResult(lcms, hcf);
+    });
+
+    resetIntegersBtn.addEventListener('click', () => {
+        integerInput.value = '';
+        resultArea.style.display = 'none';
+    });
+
+    // Fraction Calculator Logic
+    const addFractionBtn = document.getElementById('add-fraction');
+    const fractionInputsContainer = document.getElementById('fraction-inputs');
+
+    addFractionBtn.addEventListener('click', () => {
+        const newGroup = document.createElement('div');
+        newGroup.className = 'fraction-input-group';
+        newGroup.innerHTML = `
+            <input type="text" class="numerator" placeholder="লব">
+            <span class="separator">/</span>
+            <input type="text" class="denominator" placeholder="হর">
+        `;
+        fractionInputsContainer.appendChild(newGroup);
+    });
+
+    const calcFractionsBtn = document.getElementById('calc-fractions');
+    const resetFractionsBtn = document.getElementById('reset-fractions');
+
+    calcFractionsBtn.addEventListener('click', () => {
+        const numerators = [];
+        const denominators = [];
+        let isValid = true;
+
+        const fractionGroups = document.querySelectorAll('.fraction-input-group');
+        fractionGroups.forEach(group => {
+            const num = parseInt(group.querySelector('.numerator').value);
+            const den = parseInt(group.querySelector('.denominator').value);
+
+            if (isNaN(num) || isNaN(den) || den === 0) {
+                isValid = false;
+            } else {
+                numerators.push(num);
+                denominators.push(den);
+            }
+        });
+
+        if (!isValid) {
+            showError("দয়া করে সকল ভগ্নাংশে বৈধ সংখ্যা লিখুন এবং হর শূন্য হতে পারবে না।");
+            return;
+        }
+
+        if (numerators.length < 2) {
+            showError("কমপক্ষে দুটি বৈধ ভগ্নাংশ প্রয়োজন।");
+            return;
+        }
+
+        // LCM of fractions = LCM of numerators / HCF of denominators
+        const lcmNum = lcmOfArray(numerators);
+        const lcmDen = hcfOfArray(denominators);
+        const finalLCM = `${lcmNum} / ${lcmDen}`;
+
+        // HCF of fractions = HCF of numerators / LCM of denominators
+        const hcfNum = hcfOfArray(numerators);
+        const hcfDen = lcmOfArray(denominators);
+        const finalHCF = `${hcfNum} / ${hcfDen}`;
+        
+        showResult(finalLCM, finalHCF);
+    });
+
+    resetFractionsBtn.addEventListener('click', () => {
+        fractionInputsContainer.innerHTML = `
+            <div class="fraction-input-group">
+                <input type="text" class="numerator" placeholder="লব">
+                <span class="separator">/</span>
+                <input type="text" class="denominator" placeholder="হর">
+            </div>
+            <div class="fraction-input-group">
+                <input type="text" class="numerator" placeholder="লব">
+                <span class="separator">/</span>
+                <input type="text" class="denominator" placeholder="হর">
+            </div>
+        `;
+        resultArea.style.display = 'none';
+    });
+
+    // Result and Error display functions
+    const lcmResultSpan = document.getElementById('lcm-result');
+    const hcfResultSpan = document.getElementById('hcf-result');
+    const errorSpan = document.getElementById('error-message');
+
+    function showResult(lcm, hcf) {
+        lcmResultSpan.textContent = lcm;
+        hcfResultSpan.textContent = hcf;
+        lcmResultSpan.parentElement.style.display = 'block';
+        hcfResultSpan.parentElement.style.display = 'block';
+        errorSpan.style.display = 'none';
+        resultArea.style.display = 'block';
+    }
+
+    function showError(message) {
+        errorSpan.textContent = message;
+        errorSpan.style.display = 'block';
+        lcmResultSpan.parentElement.style.display = 'none';
+        hcfResultSpan.parentElement.style.display = 'none';
+        resultArea.style.display = 'block';
+    }
+});
+</script>
+
+</body>
+</html>
